@@ -1,0 +1,3 @@
+CREATE USER docker WITH PASSWORD 'docker';
+GRANT CONNECT ON DATABASE "wells" TO docker;
+GRANT SELECT ON TABLE wells TO docker;
