@@ -10,7 +10,7 @@ csvs := data/wells.csv data/counties.csv data/states.csv
 docker_image := wells
 
 .PHONY: all
-all: clean $(csvs) docker-run
+all: clean docker-run
 
 venv: requirements.txt
 	test -d $@ || python3 -m venv $@
