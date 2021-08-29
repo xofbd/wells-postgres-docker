@@ -38,6 +38,6 @@ DELIMITER ','
 CSV HEADER;
 
 COPY counties(county_id, county)
-FROM 'project/data/counties.csv'
+FROM '/project/data/counties.csv'
 DELIMITER ','
 CSV HEADER;
