@@ -1,9 +1,29 @@
 #!/bin/bash
 
+source .config
 export POSTGRES_USER=postgres
-
 DB_NAME=wells
 
-psql -c "CREATE DATABASE $DB_NAME;"
-psql -d $DB_NAME -f data/create_db.sql
-psql -d $DB_NAME -f data/create_user.sql
+replace_placeholders() {
+    sed -i "s/DB_USER/$DB_USER/" data/create_user.sql
+    sed -i "s/DB_PASSWORD/$DB_PASSWORD/" data/create_user.sql
+}
+
+setup_db() {
+    psql -c "CREATE DATABASE $DB_NAME;"
+    psql -d $DB_NAME -f data/create_db.sql
+    psql -d $DB_NAME -f data/create_user.sql
+}
+
+remove_csvs() {
+    rm data/*.csv
+}
+
+main() {
+    replace_placeholders
+    setup_db
+    remove_csvs
+}
+
+
+main

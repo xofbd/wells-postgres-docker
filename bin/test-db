@@ -1,7 +1,7 @@
 #!/bin/bash
 
-PORT=${1:-5432}
-URL=postgresql://docker:docker@localhost:$PORT/wells 
+source .config
+URL=postgresql://$DB_USER:$DB_PASSWORD@localhost:$PORT/wells
 
 query_db() {
     psql $URL -c "SELECT * FROM $1 LIMIT 5;" 2> /dev/null

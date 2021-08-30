@@ -1,5 +1,4 @@
-PORT ?= 5432
-POSTGRES_PASSWORD ?= postgres
+include .config
 
 docker_image := wells
 docker_container := postgres_wells
@@ -18,4 +17,4 @@ docker-stop:
 
 .PHONY: test-db
 test-db:
-	bin/test-db $(PORT)
+	bin/test-db
