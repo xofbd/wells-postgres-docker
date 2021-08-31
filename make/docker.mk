@@ -15,6 +15,10 @@ docker-run: docker-build
 docker-stop:
 	docker container stop $(docker_container)
 
+.PHONY: docker-shell
+docker-shell:
+	docker exec -it $(docker_container) bash
+
 .PHONY: test-db
 test-db:
 	bin/test-db
