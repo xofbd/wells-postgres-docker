@@ -1,7 +1,6 @@
 #!/bin/bash
 
-source .config
-URL=postgresql://$DB_USER:$DB_PASSWORD@localhost:$PORT/wells
+URL=$(bin/construct-url)
 
 query_db() {
     psql $URL -c "SELECT * FROM $1 LIMIT 5;" 2> /dev/null

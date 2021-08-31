@@ -1,0 +1,4 @@
+#!/bin/bash
+source .config
+
+echo "postgresql://$DB_USER:$DB_PASSWORD@localhost:$PORT/wells"
