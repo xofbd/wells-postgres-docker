@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 
 source .config
 export POSTGRES_USER=postgres
