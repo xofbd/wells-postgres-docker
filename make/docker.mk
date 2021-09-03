@@ -3,12 +3,12 @@ include .config
 docker_image := wells
 docker_container := postgres_wells
 
-.PHONY: docker-build
-docker-build:
+.PHONY: docker-image
+docker-image:
 	docker build -t $(docker_image) .
 
 .PHONY: docker-run
-docker-run: docker-build
+docker-run: docker-image
 	docker run --name $(docker_container) -d -p $(PORT):5432 --rm -e POSTGRES_PASSWORD=$(POSTGRES_PASSWORD) $(docker_image)
 
 .PHONY: docker-stop
