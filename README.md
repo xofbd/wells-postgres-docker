@@ -27,7 +27,7 @@ From the localhost, you can connect to the database using:
 as running `bin/construct-url` returns the database URL by using the values set in `.config`. In general the database URL is `postgresql://<DB_USER>:<DB_PASSWORD>@localhost:<PORT>/wells`.
 
 ## Testing
-You can test that the database is running and that all the tables are accessible by running either `make test-db` or `bin/test-db`.
+You can test that the database is running and that all the tables are accessible by running either `make test` or `bin/test-db`.
 
 ## License
 This project is distributed under the GNU General Purpose License. Please see `COPYING` for more information.
