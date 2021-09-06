@@ -9,7 +9,7 @@ before_install:
   - echo "export PORT=5432" >> .config
   - echo "export POSTGRES_PASSWORD=postgres" >> .config
   - docker build -t wells .
-  - docker run --rm -d -p 5432:5432 wells
+  - docker run --rm -p 5432:5432 wells
   - docker ps -a
   - sleep 5
 
