@@ -5,7 +5,7 @@ source .config
 export POSTGRES_USER=postgres
 DB_NAME=wells
 
-replace_placeholders() {
+set_config() {
     sed -i "s/DB_USER/$DB_USER/" data/create_user.sql
     sed -i "s/DB_PASSWORD/$DB_PASSWORD/" data/create_user.sql
 }
@@ -17,7 +17,7 @@ setup_db() {
 }
 
 main() {
-    replace_placeholders
+    set_config
     setup_db
 }
 
