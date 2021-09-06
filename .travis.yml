@@ -1,0 +1,17 @@
+language: bash
+
+services:
+  - docker
+
+before_install:
+  - cp .config.template .config
+
+install:
+  - make docker-run
+  - docker ps -a
+
+before_script:
+  - sleep 5
+
+script:
+  - make test
