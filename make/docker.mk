@@ -21,4 +21,4 @@ docker-shell:
 
 .PHONY: test
 test:
-	bin/test-db
+	test/test-db
