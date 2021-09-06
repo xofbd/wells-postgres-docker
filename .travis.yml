@@ -1,0 +1,13 @@
+language: bash
+
+services:
+  - docker
+
+before_install:
+  - test/create-config
+  - make docker-run
+  - sleep 10
+  - docker ps -a
+
+script:
+  - make test
