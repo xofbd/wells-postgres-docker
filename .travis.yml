@@ -6,8 +6,10 @@ services:
 before_install:
   - test/create-config
   - make docker-run
-  - sleep 10
   - docker ps -a
+
+before_script:
+  - sleep 20
 
 script:
   - make test
