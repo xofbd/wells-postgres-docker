@@ -16,14 +16,9 @@ setup_db() {
     psql -d $DB_NAME -f data/create_user.sql
 }
 
-remove_csvs() {
-    rm data/*.csv
-}
-
 main() {
     replace_placeholders
     setup_db
-    remove_csvs
 }
 
 
