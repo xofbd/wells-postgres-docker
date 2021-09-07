@@ -7,7 +7,7 @@ You will setup a few configuration values before getting things going. They are:
 * `DB_USER`: username to access the database
 * `DB_PASSWORD`: password of the user
 * `PORT`: The port used by the database
-* `POSTGRES_PASSWORD`: password for admin account (not important as it's not used but can't be empty)
+* `POSTGRES_PASSWORD`: password for admin account
 
 You need to create a file called `.config` in the project's root directory. An example of `.config` is shown in `.config.template`. It contains a set of defaults and you can just copy over `.config.template` to `.config`.
 

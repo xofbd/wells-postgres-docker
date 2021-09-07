@@ -22,4 +22,4 @@ WORKDIR project
 # install.sh uses sed inplace to modify the files used to setup the database.
 # However, sed will throw a permissioning error as the user is not root.
 RUN chmod a+w /project/data/
-RUN sed -i -e 's/all all all/all docker all/g' /usr/local/bin/docker-entrypoint.sh
+RUN /usr/local/bin/docker-entrypoint.sh
