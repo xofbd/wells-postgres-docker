@@ -13,6 +13,9 @@ set_config() {
 setup_db() {
     psql -c "CREATE DATABASE $DB_NAME;"
     psql -d $DB_NAME -f data/create_db.sql
+    if [[ $READ_ONLY == true ]]; then
+	psql -d $DB_NAME -c "REVOKE CREATE ON SCHEMA public FROM public;"
+    fi
     psql -d $DB_NAME -f data/create_user.sql
 }
 

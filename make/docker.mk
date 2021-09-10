@@ -18,7 +18,3 @@ docker-stop:
 .PHONY: docker-shell
 docker-shell:
 	docker exec -it $(docker_container) bash
-
-.PHONY: test
-test:
-	test/test-db
