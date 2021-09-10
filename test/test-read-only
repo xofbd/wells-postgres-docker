@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Test that database user is read only and cannot create new tables.
+set -eu
+
+source .config
+
+create_table() {
+    psql $(bin/construct-url) -c "CREATE TABLE new_table (column1 INT);"
+}
+
+main() {
+    local message
+    message=$(create_table 2>&1) || : # having || : let's us use set -eu
+
+    if echo $message | grep -q "permission denied for schema public"; then
+	echo "$DB_USER user is read-only (as expected)!"
+	exit 0
+    elif echo $message | grep -q "CREATE TABLE"; then
+	echo "Failed to prevent $DB_USER user from creating a table"
+	exit 1
+    else
+	echo "Some other problem occurred"
+	echo $message
+	exit 1
+    fi
+}
+
+
+main
