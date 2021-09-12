@@ -32,7 +32,7 @@ as running `bin/construct-url` returns the database URL by using the values set 
 Calling `make test` will run the following tests:
 
 * `test/test-connection`: the `DB_USER` can access the database
-* `test/test-tables`: the tables are accessible by `DB_USER`
+* `test/test-tables`: the tables are accessible by `DB_USER` and tables are populated
 * `test/test-read-only`: `DB_USER` is read only (will fail if `READ_ONLY` was not set to `true`)
 * `test/test-lock`: the database is locked for everyone but `DB_USER` (will fail if `DB_LOCK` was not set to `true`)
 
