@@ -4,6 +4,7 @@
 set -eu
 
 source .config
+source test/functions.sh
 URL=$(bin/construct-url)
 
 create_table() {
@@ -15,13 +16,14 @@ main() {
     message=$(create_table 2>&1) || : # having || : let's us use set -eu
 
     if echo $message | grep -q "permission denied for schema public"; then
-	echo "$DB_USER user is read-only (as expected)!"
+	echo_success "PASSED: the user $DB_USER has read-only privilege"
 	exit 0
     elif echo $message | grep -q "CREATE TABLE"; then
-	echo "Failed to prevent $DB_USER user from creating a table"
+	echo_failure "FAILED: the user $DB_USER can create tables"
 	exit 1
     else
-	echo "Some other problem occurred"
+	echo_failure "FAILED: some other problem occurred when testing for read-only privilege"
+	echo_failure "See message below:"
 	echo $message
 	exit 1
     fi
