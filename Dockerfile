@@ -13,11 +13,13 @@ RUN make prepare-csv
 # Setup database
 FROM postgres
 
+WORKDIR project
 COPY --from=builder /project/data/*.csv /project/data/
 COPY bin/install.sh /docker-entrypoint-initdb.d/
 COPY sql/*.sql /project/data/
 COPY .config /project/
-WORKDIR project
+COPY bin/pre-install.sh /project/data/
+RUN /project/data/pre-install.sh
 
 # install.sh uses sed inplace to modify the files used to setup the database.
 # However, sed will throw a permissioning error as the user is not root.

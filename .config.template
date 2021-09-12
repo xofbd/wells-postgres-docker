@@ -3,3 +3,4 @@ export DB_USER=docker
 export DB_PASSWORD=docker
 export POSTGRES_PASSWORD=postgres
 export READ_ONLY=true
+export LOCK_DB=true

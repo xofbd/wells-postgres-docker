@@ -8,3 +8,4 @@ include make/data.mk
 test:
 	test/test-db
 	test/test-read-only
+	test/test-lock

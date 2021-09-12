@@ -9,6 +9,7 @@ You will setup a few configuration values before getting things going. They are:
 * `PORT`: The port used by the database
 * `POSTGRES_PASSWORD`: password for admin account
 * `READ_ONLY`: set to `true` to prevent `DB_USER` from creating new tables
+* `LOCK_DB`: set to `true` to lock everyone but `DB_USER` from accessing the database
 
 You need to create a file called `.config` in the project's root directory. An example of `.config` is shown in `.config.template`. It contains a set of defaults and you can just copy over `.config.template` to `.config`.
 
@@ -28,7 +29,13 @@ From the localhost, you can connect to the database using:
 as running `bin/construct-url` returns the database URL by using the values set in `.config`. In general the database URL is `postgresql://<DB_USER>:<DB_PASSWORD>@localhost:<PORT>/wells`.
 
 ## Testing
-Calling `make test` will test that the database is running, that all the tables are accessible, and `DB_USER` is read only. You can run the tests individually by running `test/test-db` and `test/test-read-only`. Note, the latter will fail if `READ_ONLY` was not set to `true`.
+Calling `make test` will run the following tests:
+
+* `test/test-db`: the database is running and tables are accessible
+* `test/test-read-only`: `DB_USER` is read only (will fail if `READ_ONLY` was not set to `true`)
+* `test/test-lock`: the database is locked for everyone but `DB_USER` (will fail if `DB_LOCK` was not set to `true`)
+
+You can run the tests individually, too. E.g., `test/test-db`.
 
 ## License
 This project is distributed under the GNU General Purpose License. Please see `COPYING` for more information.

@@ -3,4 +3,8 @@ set -eu
 
 source .config
 
-echo "postgresql://$DB_USER:$DB_PASSWORD@localhost:$PORT/wells"
+if [[ $# -eq 1 && $1 == '--admin' ]]; then
+    echo "postgresql://postgres:$POSTGRES_PASSWORD@localhost:$PORT/wells"
+else
+    echo "postgresql://$DB_USER:$DB_PASSWORD@localhost:$PORT/wells"
+fi
