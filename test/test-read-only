@@ -15,7 +15,7 @@ main() {
     message=$(create_table 2>&1) || : # having || : let's us use set -eu
 
     if echo $message | grep -q "permission denied for schema public"; then
-	echo "$DB_USER user is read-only (as expected)!"
+	echo "The user $DB_USER is read-only"
 	exit 0
     elif echo $message | grep -q "CREATE TABLE"; then
 	echo "Failed to prevent $DB_USER user from creating a table"

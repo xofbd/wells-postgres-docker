@@ -15,9 +15,9 @@ count_rows() {
 
 test_select() {
     if query_db $1; then
-	echo "Successfully queried $1 table!"
+	echo "Successfully queried the $1 table"
     else
-	echo "Failed to query $1 table"
+	echo "Failed to query the $1 table"
 	exit 1
     fi
 }

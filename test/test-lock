@@ -14,7 +14,7 @@ main() {
     message=$(list_tables 2>&1) || : # having || : let's us use set -eu
 
     if echo $message | grep -q "no pg_hba.conf entry"; then
-	echo "postgres user cannot access database (as expected)!"
+	echo "Postgres admin user cannot access the database"
     else
 	echo "Failed to prevent locking the database"
     fi
