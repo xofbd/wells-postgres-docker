@@ -7,5 +7,3 @@ include make/data.mk
 .PHONY: test
 test:
 	test/test-db
-	test/test-read-only
-	test/test-lock

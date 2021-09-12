@@ -1,0 +1,16 @@
+#!/bin/bash
+set -eu
+
+URL=$(bin/construct-url)
+
+main() {
+    if psql $URL -l &> /dev/null; then
+	echo "Successfully connected to the database!"
+    else
+	echo "Failed to connect to database using $URL"
+	exit 1
+    fi
+}
+
+
+main

@@ -31,11 +31,12 @@ as running `bin/construct-url` returns the database URL by using the values set 
 ## Testing
 Calling `make test` will run the following tests:
 
-* `test/test-db`: the database is running and tables are accessible
+* `test/test-connection`: the `DB_USER` can access the database
+* `test/test-tables`: the tables are accessible by `DB_USER`
 * `test/test-read-only`: `DB_USER` is read only (will fail if `READ_ONLY` was not set to `true`)
 * `test/test-lock`: the database is locked for everyone but `DB_USER` (will fail if `DB_LOCK` was not set to `true`)
 
-You can run the tests individually, too. E.g., `test/test-db`.
+You can run the tests individually, too. E.g., `test/test-connection`.
 
 ## License
 This project is distributed under the GNU General Purpose License. Please see `COPYING` for more information.
