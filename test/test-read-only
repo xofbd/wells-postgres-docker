@@ -4,9 +4,10 @@
 set -eu
 
 source .config
+URL=$(bin/construct-url)
 
 create_table() {
-    psql $(bin/construct-url) -c "CREATE TABLE new_table (column1 INT);"
+    psql $URL -c "CREATE TABLE new_table (column1 INT);"
 }
 
 main() {

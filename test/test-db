@@ -1,35 +1,13 @@
 #!/bin/bash
+#
+# Convenient script to run all tests
 set -eu
 
-URL=$(bin/construct-url)
-
-query_db() {
-    psql $URL -c "SELECT * FROM $1 LIMIT 5;" &> /dev/null
-}
-
-test_connection() {
-    if psql $URL -l &> /dev/null; then
-	echo "Successfully connected to the database!"
-    else
-	echo "Failed to connect to database using $URL"
-	exit 1
-    fi
-}
-
-test_table() {
-    if query_db $1; then
-	echo "Successfully queried $1 table!"
-    else
-	echo "Failed to query $1 table"
-	exit 1
-    fi
-}
-
 main() {
-    test_connection
-    test_table wells
-    test_table states
-    test_table counties
+    test/test-connection
+    test/test-tables
+    test/test-read-only
+    test/test-lock
 }
 
 

@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Test that DB_USER can select tables in the database.
+set -eu
+
+URL=$(bin/construct-url)
+
+query_db() {
+    psql $URL -c "SELECT * FROM $1 LIMIT 5;" &> /dev/null
+}
+
+test_table() {
+    if query_db $1; then
+	echo "Successfully queried $1 table!"
+    else
+	echo "Failed to query $1 table"
+	exit 1
+    fi
+}
+
+main() {
+    test_table wells
+    test_table states
+    test_table counties
+}
+
+
+main

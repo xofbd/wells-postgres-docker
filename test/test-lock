@@ -3,10 +3,10 @@
 # Attempt to access the database with the postgres admin account.
 set -eu
 
-source .config
+URL_ADMIN=$(bin/construct-url --admin)
 
 list_tables() {
-    psql -l $(bin/construct-url --admin)
+    psql -l $URL_ADMIN
 }
 
 main() {
