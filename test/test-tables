@@ -3,6 +3,8 @@
 # Test that DB_USER can select tables and that they are populated.
 set -eu
 
+source .config
+source test/functions.sh
 URL=$(bin/construct-url)
 
 query_db() {
@@ -15,18 +17,18 @@ count_rows() {
 
 test_select() {
     if query_db $1; then
-	echo "Successfully queried the $1 table"
+	echo_success "PASSED: the user $DB_USER has select access"
     else
-	echo "Failed to query the $1 table"
+	echo_failure "FAILED: $DB_USER could not select the $1 table"
 	exit 1
     fi
 }
 
 test_table_populated() {
     if [[ $(count_rows $1) -gt 0 ]]; then
-	echo "The $1 table is populated"
+	echo_success "PASSED: the $1 table is populated"
     else
-	echo "The $1 table is not populated"
+	echo_failure "FAILED: the $1 table is not populated"
 	exit 1
     fi
 }

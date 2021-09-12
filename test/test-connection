@@ -1,13 +1,15 @@
 #!/bin/bash
 set -eu
 
+source .config
+source test/functions.sh
 URL=$(bin/construct-url)
 
 main() {
     if psql $URL -l &> /dev/null; then
-	echo "Successfully connected to the database"
+	echo_success "PASSED: the user $DB_USER can access the database"
     else
-	echo "Failed to connect to database using $URL"
+	echo_failure "FAILED: the user $DB_USER cannot access the database using $URL"
 	exit 1
     fi
 }
