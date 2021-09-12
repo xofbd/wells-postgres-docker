@@ -24,9 +24,9 @@ test_select() {
 
 test_table_populated() {
     if [[ $(count_rows $1) -gt 0 ]]; then
-	echo "$1 table is populated!"
+	echo "The $1 table is populated"
     else
-	echo "$1 table is not populated"
+	echo "The $1 table is not populated"
 	exit 1
     fi
 }
