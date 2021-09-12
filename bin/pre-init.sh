@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Pre-install tasks to run before calling the entry point script.
+# Pre-initialization tasks to run before calling the entry point script.
 set -eu
 
 source .config
@@ -13,8 +13,8 @@ lock_db() {
 }
 
 set_config() {
-    sed -i "s/DB_USER/$DB_USER/" data/create_user.sql
-    sed -i "s/DB_PASSWORD/$DB_PASSWORD/" data/create_user.sql
+    sed -i "s/DB_USER/$DB_USER/" sql/create_user.sql
+    sed -i "s/DB_PASSWORD/$DB_PASSWORD/" sql/create_user.sql
 }
 
 main() {
