@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Test that DB_USER can select tables in the database.
+# Test that DB_USER can select tables and that they are populated.
 set -eu
 
 URL=$(bin/construct-url)
@@ -9,7 +9,11 @@ query_db() {
     psql $URL -c "SELECT * FROM $1 LIMIT 5;" &> /dev/null
 }
 
-test_table() {
+count_rows() {
+    psql -t $URL -c "SELECT COUNT(*) FROM $1;" 2>&1
+}
+
+test_select() {
     if query_db $1; then
 	echo "Successfully queried $1 table!"
     else
@@ -18,10 +22,20 @@ test_table() {
     fi
 }
 
+test_table_populated() {
+    if [[ $(count_rows $1) -gt 0 ]]; then
+	echo "$1 table is populated!"
+    else
+	echo "$1 table is not populated"
+	exit 1
+    fi
+}
+
 main() {
-    test_table wells
-    test_table states
-    test_table counties
+    test_select wells
+    test_table_populated wells
+    test_table_populated states
+    test_table_populated counties
 }
 
 
