@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# Attempt to access the database with the postgres admin account.
+set -eu
+
+source .config
+
+list_tables() {
+    psql -l $(bin/construct-url --admin)
+}
+
+main() {
+    local message
+    message=$(list_tables 2>&1) || : # having || : let's us use set -eu
+
+    if echo $message | grep -q "no pg_hba.conf entry"; then
+	echo "postgres user cannot access database (as expected)!"
+    else
+	echo "Failed to prevent locking the database"
+    fi
+}
+
+
+main
