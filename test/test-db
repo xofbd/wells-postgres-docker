@@ -4,10 +4,23 @@
 set -eu
 
 main() {
+    # An error in the following two tests should make the script exit
+    # immediately
     test/test-connection
     test/test-tables
-    test/test-read-only
-    test/test-lock
+
+    # If the script has not exited, the following tests should still be run
+    local ERROR
+    ERROR=0
+
+    test/test-read-only || ERROR=1
+    test/test-lock || ERROR=1
+
+    if [[ $ERROR -eq 1 ]]; then
+	return 1
+    else
+	return 0
+    fi
 }
 
 
