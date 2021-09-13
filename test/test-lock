@@ -16,8 +16,15 @@ main() {
 
     if echo $message | grep -q "no pg_hba.conf entry"; then
 	echo_success "PASSED: postgres admin user is locked out of the database"
+	exit 0
+    elif echo $message | grep -q "FATAL"; then
+	echo_failure "FAILED: some other problem occurred when testing for locking out the postgres admin"
+	echo_failure "See message below:"
+	echo $message
+	exit 1
     else
 	echo_failure "FAILED: postgres admin user is not locked out the database"
+	exit 1
     fi
 }
 
